@@ -6,50 +6,703 @@
   <meta name="referrer" content="no-referrer" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Interstellar - Modern web proxy with blazing fast speeds and variety of games" />
+  <meta name="theme-color" content="#0f0f23" />
   <link rel="shortcut icon" id="tab-favicon" href="favicon.png" />
-  <title id="t">Home</title>
+  <title>Interstellar - Web Proxy & Games Hub</title>
   <link rel="stylesheet" href="/assets/css/global.css?v=6" />
   <link rel="stylesheet" href="/assets/css/h.css?v=01" />
   <link rel="stylesheet" href="/assets/css/nav.css?v=01" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6840529569014734"
-    crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #00d4ff;
+      --secondary: #0099ff;
+      --accent: #00ff88;
+      --dark-bg: #0f0f23;
+      --darker-bg: #0a0a15;
+      --card-bg: rgba(0, 212, 255, 0.05);
+      --text-primary: #e0e0e0;
+      --text-secondary: #b0b0b0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary);
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
+    }
+
+    .navbar-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      padding: 0.7rem 1.5rem;
+      border: 2px solid var(--primary);
+      background: rgba(0, 212, 255, 0.1);
+      color: var(--primary);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-btn:hover {
+      background: rgba(0, 212, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-top: 80px;
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+      animation: float 20s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(50px, 50px); }
+      50% { transform: translate(-50px, -50px); }
+      75% { transform: translate(-50px, 50px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+      letter-spacing: -2px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+    }
+
+    /* Search Section */
+    .search-section {
+      max-width: 800px;
+      margin: 2rem auto 0;
+    }
+
+    .search-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 1.2rem;
+      border: 2px solid var(--primary);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .search-input:focus {
+      outline: none;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent);
+    }
+
+    .btn {
+      padding: 1.2rem 2.5rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--darker-bg);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 212, 255, 0.25);
+      transform: translateY(-3px);
+    }
+
+    /* Features Section */
+    .features {
+      max-width: 1400px;
+      margin: 5rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      border-radius: 15px;
+      padding: 2.5rem;
+      text-align: center;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-15px);
+      background: rgba(0, 212, 255, 0.15);
+      box-shadow: 0 25px 50px rgba(0, 212, 255, 0.25);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      z-index: 1;
+      position: relative;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Games Section */
+    .games-section {
+      max-width: 1400px;
+      margin: 5rem auto 2rem;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+    }
+
+    .game-filters {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      padding: 0.8rem 1.5rem;
+      border: 2px solid var(--primary);
+      background: rgba(0, 212, 255, 0.1);
+      color: var(--primary);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary);
+      color: var(--darker-bg);
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .game-card {
+      background: var(--card-bg);
+      border: 2px solid var(--primary);
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      color: var(--text-primary);
+      text-align: center;
+      padding: 1.5rem 1rem;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      position: relative;
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 1;
+    }
+
+    .game-card:hover {
+      transform: scale(1.08) translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 212, 255, 0.3);
+      background: rgba(0, 212, 255, 0.15);
+    }
+
+    .game-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .game-icon {
+      font-size: 3rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .game-name {
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    .game-category {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* Footer */
+    .footer {
+      background: rgba(0, 0, 0, 0.9);
+      text-align: center;
+      padding: 3rem 2rem;
+      margin-top: 5rem;
+      border-top: 2px solid var(--primary);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer p {
+      color: var(--text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .game-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .feature-card {
+        padding: 1.5rem;
+      }
+
+      .navbar-content {
+        gap: 1rem;
+      }
+    }
+
+    /* Loading animation */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .loading {
+      animation: pulse 1.5s infinite;
+    }
+  </style>
 </head>
 
-<body class="center" onload="SplashT">
-  <div class="f-nav"></div>
-  <div id="particles-js">
-    <script rel="preload" src="https://cdn.jsdelivr.net/particles.js/2.0.0/"></script>
-    <div class="main">
-      <h1 class="title">&#73;&#110;&#116;&#101;&#114;&#115;&#116;&#101;&#108;&#108;&#97;&#114;</h1>
-      <p id="splash"></p>
-      <div class="search-container">
-        <form id="fv" method="POST">
-          <input id="input" class="truncate" placeholder="Search or enter a URL" type="text" />
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="navbar-brand">
+        <i class="fas fa-rocket"></i> Interstellar
+      </div>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="/b">Apps</a></li>
+        <li><a href="/c">Settings</a></li>
+      </ul>
+      <div class="nav-buttons">
+        <a href="#proxy" class="nav-btn">Start Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>🚀 Interstellar</h1>
+      <p class="hero-subtitle">Modern Web Proxy with Blazing Fast Speeds & Variety of Games</p>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number">15M+</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">Games & Apps</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">⚡</div>
+          <div class="stat-label">Blazing Fast</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">🔒</div>
+          <div class="stat-label">Secure</div>
+        </div>
+      </div>
+
+      <div class="search-section">
+        <form id="proxyForm" class="search-container">
+          <input type="text" id="proxyInput" class="search-input" placeholder="Search or enter a URL..." required>
+          <button type="submit" class="btn btn-primary">Access</button>
         </form>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="feature-card">
+      <i class="fas fa-lock-open feature-icon"></i>
+      <h3>100% Unblocked</h3>
+      <p>Access any website and content without restrictions. Browse freely anywhere.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-tachometer-alt feature-icon"></i>
+      <h3>Blazing Fast</h3>
+      <p>Lightning-fast speeds with optimized servers. Experience zero lag browsing.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-shield-alt feature-icon"></i>
+      <h3>Secure & Private</h3>
+      <p>Your activity stays completely private. Military-grade encryption protection.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-gamepad feature-icon"></i>
+      <h3>100+ Games</h3>
+      <p>Play thousands of unblocked games. From classics to modern adventures.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-cloak feature-icon"></i>
+      <h3>Tab Cloaking</h3>
+      <p>Hide your activity with advanced cloaking technology. Stay undetected.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-palette feature-icon"></i>
+      <h3>Custom Themes</h3>
+      <p>Personalize your experience with various themes and customization options.</p>
+    </div>
+  </section>
+
+  <!-- Games Section -->
+  <section class="games-section" id="games">
+    <h2 class="section-title">🎮 Popular Games</h2>
+
+    <div class="game-filters">
+      <button class="filter-btn active" onclick="filterGames('all')">All</button>
+      <button class="filter-btn" onclick="filterGames('casual')">Casual</button>
+      <button class="filter-btn" onclick="filterGames('multiplayer')">Multiplayer</button>
+      <button class="filter-btn" onclick="filterGames('sports')">Sports</button>
+      <button class="filter-btn" onclick="filterGames('action')">Action</button>
+    </div>
+
+    <div class="game-grid" id="gameGrid">
+      <!-- Games will be populated here -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/b">Apps</a>
+        <a href="/games">Games Hub</a>
+        <a href="/c">Settings</a>
+        <a href="https://discord.gg/interstellar" target="_blank">Discord</a>
+      </div>
+      <p>&copy; 2024 Interstellar. One of the most popular modern web proxies.</p>
+      <p>Serving over 15 million users since 2022 with blazing fast speeds and variety.</p>
+    </div>
+  </footer>
+
+  <!-- Proxy Scripts -->
   <script src="/assets/js/mg-pxy.js"></script>
-  <script src="assets/js/index-3.js"></script>
+  <script src="/assets/js/index-3.js"></script>
   <script src="/assets/js/h1.js"></script>
   <script src="./assets/mathematics/bundle.js?v=2025-04-15"></script>
   <script src="./assets/mathematics/config.js?v=2025-04-15"></script>
   <script src="/assets/languagearts/sj.all.js?v=2025-04-15"></script>
   <script src="/assets/js/sj-tp.js?v=2025-04-15"></script>
   <script src="/assets/js/m1.js"></script>
-  <!-- DO NOT REMOVE-->
+
+  <script>
+    const games = [
+      { name: 'Flappy Bird', icon: '🐦', category: 'casual' },
+      { name: 'Snake Game', icon: '🐍', category: 'casual' },
+      { name: 'Tetris', icon: '🟩', category: 'casual' },
+      { name: 'Pac Man', icon: '👾', category: 'action' },
+      { name: 'Dino Run', icon: '🦖', category: 'action' },
+      { name: 'Chess', icon: '♟️', category: 'casual' },
+      { name: 'Agar.io', icon: '⭕', category: 'multiplayer' },
+      { name: 'Slither.io', icon: '🐛', category: 'multiplayer' },
+      { name: '2048', icon: '2️⃣', category: 'casual' },
+      { name: 'Wordle', icon: '🔤', category: 'casual' },
+      { name: 'Geometry Dash', icon: '🔷', category: 'action' },
+      { name: 'Football', icon: '⚽', category: 'sports' },
+      { name: 'Basketball', icon: '🏀', category: 'sports' },
+      { name: 'Tennis', icon: '🎾', category: 'sports' },
+      { name: 'Cookie Clicker', icon: '🍪', category: 'casual' },
+      { name: 'Breakout', icon: '🧱', category: 'action' },
+    ];
+
+    function renderGames(category = 'all') {
+      const gameGrid = document.getElementById('gameGrid');
+      const filtered = category === 'all' ? games : games.filter(g => g.category === category);
+
+      gameGrid.innerHTML = filtered.map(game => `
+        <a href="/a" class="game-card" onclick="console.log('Playing ${game.name}')">
+          <div class="game-content">
+            <div class="game-icon">${game.icon}</div>
+            <div class="game-name">${game.name}</div>
+            <div class="game-category">${game.category}</div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function filterGames(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderGames(category);
+    }
+
+    // Proxy form handler
+    document.getElementById('proxyForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const url = document.getElementById('proxyInput').value;
+      if (url) {
+        window.location.href = `/a/q/?url=${btoa(url)}`;
+      }
+    });
+
+    // Initialize
+    renderGames();
+  </script>
+
+  <!-- Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJQ5QHQTJ"></script>
   <script>
-    window.dataLayer = window.dataLayer || []
-    function gtag() {
-      dataLayer.push(arguments)
-    }
-    gtag("js", new Date())
-
-    gtag("config", "G-WKJQ5QHQTJ")
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-WKJQ5QHQTJ');
   </script>
-  <!-- DO NOT REMOVE-->
 </body>
 
 </html>
